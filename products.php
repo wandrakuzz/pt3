@@ -33,27 +33,27 @@
 
     <form action="products.php" class="form-horizontal" method="post">
       <div class="form-group">
-          <label for="productid" class="col-sm-3 control-label">Product ID</label>
-          <div class="col-sm-9">
-            <input name="pid" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_ID']; ?>"> <br>
+          <label for="productid" class="col-sm-3 control-label">ID</label>
+          <div class="col-sm-7">
+            <input name="pid" type="text" class="form-control" placeholder="Product ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_ID']; ?>" required> <br>
           </div>
         </div>
         <div class="form-group">
             <label for="productname" class="col-sm-3 control-label">Name</label>
-            <div class="col-sm-9">
-              <input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>"> <br>
+            <div class="col-sm-7">
+              <input name="name" type="text" class="form-control" placeholder="Product Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>"required> <br>
             </div>
           </div>
           <div class="form-group">
               <label for="productprice" class="col-sm-3 control-label">Price</label>
-              <div class="col-sm-9">
-                <input name="price" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>"> <br>
+              <div class="col-sm-7">
+                <input name="price" type="text" class="form-control" placeholder="Product Price" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>"required> <br>
               </div>
           </div>
           <div class="form-group">
               <label for="productyear" class="col-sm-3 control-label">Brand</label>
-              <div class="col-sm-9">
-                <select name="brand">
+              <div class="col-sm-7">
+                <select name="brand" class="form-control" id=product_brand required>
                   <option value="Sony" <?php if(isset($_GET['edit'])) if($editrow['fld_brand']=="Sony") echo "selected"; ?>>Sony</option>
                   <option value="Epson" <?php if(isset($_GET['edit'])) if($editrow['fld_brand']=="Epson") echo "selected"; ?>>Epson</option>
                   <option value="BenQ" <?php if(isset($_GET['edit'])) if($editrow['fld_brand']=="BenQ") echo "selected"; ?>>BenQ</option>
@@ -66,10 +66,10 @@
          <div class="col-sm-9">
          <div class="radio-inline">
            <label>
-             <input name="warranty" type="radio" value="1" <?php if(isset($_GET['edit'])) if($editrow['fld_warrantylength']=="1") echo "checked"; ?>> 1
+             <input name="warranty" type="radio" value="1" <?php if(isset($_GET['edit'])) if($editrow['fld_warrantylength']=="1") echo "checked"; ?>required> 1
            </label>
          </div>
-         <div class="radio-inline">
+         <div class="radio-inline" required>
            <label>
              <input name="warranty" type="radio" value="1" <?php if(isset($_GET['edit'])) if($editrow['fld_warrantylength']=="1") echo "checked"; ?>> 2
            </label>
@@ -83,8 +83,8 @@
      </div>
      <div class="form-group">
          <label for="producttype" class="col-sm-3 control-label">Type</label>
-         <div class="col-sm-9">
-           <select name="type">
+         <div class="col-sm-7">
+           <select name="type" class="form-control" required>
              <option value="full3d" <?php if(isset($_GET['edit'])) if($editrow['fld_type']=="full3d") echo "selected"; ?>>Full 3D Projector</option>
              <option value="pc3d" <?php if(isset($_GET['edit'])) if($editrow['fld_type']=="pc3d") echo "selected"; ?>>PC 3D Ready Projector</option>
              <option value="digitalmultimedia" <?php if(isset($_GET['edit'])) if($editrow['fld_type']=="digitalmultimedia") echo "selected"; ?>>Digital Multimedia</option>
@@ -93,37 +93,51 @@
        </div>
        <div class="form-group">
           <label for="productq" class="col-sm-3 control-label">Quantity</label>
-          <div class="col-sm-9">
-            <input name="quantity" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>">
+          <div class="col-sm-7">
+            <input name="quantity" type="text" class="form-control" placeholder="Product Quantity" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>"required>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
       <?php if (isset($_GET['edit'])) { ?>
       <input type="hidden" name="oldpid" value="<?php echo $editrow['fld_product_ID']; ?>">
-      <button type="submit" name="update">Update</button>
+      <button class="btn btn-primary"type="submit" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update</button>
       <?php } else { ?>
-      <button class="btn btn-success"type="submit" name="create">Create</button>
+      <button class="btn btn-success"type="submit" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Create</button>
       <?php } ?>
-      <button class="btn btn-danger"type="reset">Clear</button>
+      <button class="btn btn-danger"type="reset"><span class="glyphicon glyphicon-erase" aria-hidden="true"> Clear</button>
         </div>
       </div>
     </form>
-    <hr>
-    <table border="1">
-      <tr>
-        <td>Product ID</td>
-        <td>Name</td>
-        <td>Price</td>
-        <td>Brand</td>
-        <td></td>
-      </tr>
+  </div>
+</div>
+    <br>
+    <br>
+    <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+      <div class="page-header">
+        <h2>Products List</h2>
+      </div>
+      <table class="table table-striped table-bordered">
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Brand</th>
+          <th></th>
+        </tr>
       <?php
       // Read
+      $per_page = 5;
+      if (isset($_GET["page"]))
+        $page = $_GET["page"];
+      else
+        $page = 1;
+      $start_from = ($page-1) * $per_page;
       try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $stmt = $conn->prepare("SELECT * FROM tbl_products_a148647");
+        $stmt = $conn->prepare("select * from tbl_products_a148647 LIMIT $start_from, $per_page");
         $stmt->execute();
         $result = $stmt->fetchAll();
       }
@@ -138,23 +152,62 @@
         <td><?php echo $readrow['fld_product_price']; ?></td>
         <td><?php echo $readrow['fld_brand']; ?></td>
         <td>
-          <a href="products_details.php?pid=<?php echo $readrow['fld_product_ID']; ?>">Details</a>
-          <a href="products.php?edit=<?php echo $readrow['fld_product_ID']; ?>">Edit</a>
-          <a href="products.php?delete=<?php echo $readrow['fld_product_ID']; ?>" onclick="return confirm('Are you sure to delete?');">Delete</a>
+          <a href="products_details.php?pid=<?php echo $readrow['fld_product_ID']; ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+          <a href="products.php?edit=<?php echo $readrow['fld_product_ID']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+          <a href="products.php?delete=<?php echo $readrow['fld_product_ID']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
         </td>
       </tr>
-      <?php
-      }
-      $conn = null;
-      ?>
+      <?php } ?>
 
-    </table>
-  </div>
+      </table>
+    </div>
   </div>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <nav>
+          <ul class="pagination">
+            <?php
+              try {
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $conn->prepare("SELECT * FROM tbl_products_a148647");
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                $total_records = count($result);
+              }
+              catch(PDOException $e){
+                    echo "Error: " . $e->getMessage();
+              }
+              $total_pages = ceil($total_records / $per_page);
+            ?>
+            <?php if ($page==1) { ?>
+              <li class="disabled"><span aria-hidden="true">«</span></li>
+            <?php } else { ?>
+              <li><a href="products.php?page=<?php echo $page-1 ?>" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+            <?php } ?>
+            <?php
+              for ($i=1; $i<=$total_pages; $i++)
+                if ($i == $page)
+                  echo "<li class=\"active\"><a href=\"products.php?page=$i\">$i</a></li>";
+                else
+                  echo "<li><a href=\"products.php?page=$i\">$i</a></li>";
+            ?>
+            <?php if ($page==$total_pages) { ?>
+              <li class="disabled"><span aria-hidden="true">»</span></li>
+            <?php } else { ?>
+              <li><a href="products.php?page=<?php echo $page+1 ?>" aria-label="Previous"><span aria-hidden="true">»</span></a></li>
+            <?php } ?>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
