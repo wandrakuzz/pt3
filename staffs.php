@@ -5,15 +5,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Projector and Projection Accessories : Staffs</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
-  <center>
-    <a href="index.php">Home</a> |
-    <a href="products.php">Products</a> |
-    <a href="customers.php">Customers</a> |
-    <a href="staffs.php">Staffs</a> |
-    <a href="orders.php">Orders</a>
+  <?php include_once 'nav_bar.php'; ?>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="page-header">
+          <h2>Create Staff</h2>
+        </div>
+
+      <form action="staffs.php" class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="staffid" class="col-sm-3 control-label">ID</label>
+            <div class="col-sm-7">
+              <input name="sid" class="form-control" type="text" placeholder="Staff ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_ID']; ?>" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="staffname" class="col-sm-3 control-label">Name</label>
+              <div class="col-sm-7">
+                <input name="name" type="text" class="form-control" placeholder="Customer Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_name']; ?>" required>
+              </div>
+        </div>
+        <div class="form-group">
+          <label for="customergender" class="col-sm-3 control-label">Gender</label>
+          <div class="col-sm-9">
+            <div class="radio-inline">
+              <label>
+                <input name="gender" type="radio" value="Male" <?php if(isset($_GET['edit'])) if($editrow['fld_customer_gender']=="Male") echo "checked"; ?>> Male
+              </label>
+            </div>
+          <div class="radio-inline" required>
+            <label>
+              <input name="gender" type="radio" value="Female" <?php if(isset($_GET['edit'])) if($editrow['fld_customer_gender']=="Female") echo "checked"; ?>> Female
+            </label>
+          </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
     <hr>
     <form action="staffs.php" method="post">
       Customer ID
@@ -75,6 +128,5 @@
       $conn = null;
       ?>
     </table>
-  </center>
 </body>
 </html>
